@@ -19,14 +19,19 @@ func Register(ctx *gin.Context) {
 	}
 
 	//2,业务逻辑处理
-	service.Register(registerParam)
+	err := service.Register(registerParam)
+	if err != nil {
+		ctx.JSON(http.StatusOK, gin.H{
+			"msg": err.Error(),
+		})
+		return
+	}
 	//3，数据返回
 
 	//对数据封装
 	ctx.JSON(http.StatusOK, gin.H{
 		"code": "200",
-		"msg":  "",
-		"data": "ddd",
+		"msg":  "register success",
 	})
 }
 

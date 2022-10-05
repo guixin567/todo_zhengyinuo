@@ -3,6 +3,7 @@ package test
 import (
 	"github.com/spf13/viper"
 	"testing"
+	"todo_zhengyinuo/service"
 	"todo_zhengyinuo/test/config"
 )
 
@@ -20,4 +21,9 @@ func TestViper(test *testing.T) {
 
 	println("zhengxin", redisName)
 	println("zhengxin222", config1.AppMode)
+}
+
+func TestMd5(test *testing.T) {
+	password := service.EncryptPassword("1234")
+	println(password)
 }
