@@ -1,0 +1,17 @@
+service:
+  app_mode:  debug
+  HttpPort:  :8080
+
+redis:
+  RedisAddr:  172.19.176.25:6379
+  RedisPw:
+  RedisDbName:  2
+
+mysql:
+  Db: mysql
+  DbHost: 127.0.0.1
+  DbPort: 3306
+  DbUser: root
+  DbPassword: root
+  DbName: todo_list_1
+
