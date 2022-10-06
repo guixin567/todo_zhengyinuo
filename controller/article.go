@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
+	"strconv"
 	"todo_zhengyinuo/controller/response"
 	"todo_zhengyinuo/domain"
 	"todo_zhengyinuo/service"
@@ -26,4 +27,21 @@ func AddArticle(ctx *gin.Context) {
 	//3，返回数据
 	response.ToSuccessJson(ctx, article)
 
+}
+
+func Article(ctx *gin.Context) {
+	id, err := strconv.Atoi(ctx.Param(response.KeyArticleId))
+	articleId := int64(id)
+	if err != nil {
+		response.ToErrorJson(ctx, response.CodeInvalidParam, nil)
+		return
+	}
+
+	article, err := service.Article(articleId)
+	if err != nil {
+		response.ToErrorJson(ctx, response.CodeServerError, nil)
+		return
+	}
+
+	response.ToSuccessJson(ctx, article)
 }

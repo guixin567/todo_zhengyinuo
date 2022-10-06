@@ -8,3 +8,7 @@ import (
 func AddArticle(param *domain.AddArticleParam) (*domain.Article, error) {
 	return mysql.InsertArticle(param)
 }
+
+func Article(articleId int64) (*domain.Article, error) {
+	return mysql.SearchArticle(articleId)
+}
