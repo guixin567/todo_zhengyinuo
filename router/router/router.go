@@ -23,5 +23,8 @@ func Init() *gin.Engine {
 
 	taskGroup.GET("/category", controller.Category)
 	taskGroup.GET("/categoryDetail/:id", controller.CategoryDetail)
+	taskGroup.Use(middleware.JwtAuth)
+	taskGroup.POST("/addArticle", controller.AddArticle)
+
 	return engine
 }
