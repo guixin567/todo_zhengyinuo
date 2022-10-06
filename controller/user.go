@@ -37,11 +37,13 @@ func Login(ctx *gin.Context) {
 	}
 
 	//2,业务逻辑处理
-	if err := service.Login(param); err != nil {
+	token, err := service.Login(param)
+	if err != nil {
 		common.ToErrorJson(ctx, common.CodeUserNameOrPasswordError, nil)
 		return
 	}
+
 	//3，数据返回
-	common.ToSuccessJson(ctx, nil)
+	common.ToSuccessJson(ctx, token)
 	return
 }

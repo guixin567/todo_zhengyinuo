@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"todo_zhengyinuo/dao/mysql"
 	"todo_zhengyinuo/domain"
+	"todo_zhengyinuo/pkg/jwt"
 	"todo_zhengyinuo/pkg/snow_flake"
 )
 
@@ -40,7 +41,7 @@ func EncryptPassword(password string) string {
 	return hex.EncodeToString(hash.Sum([]byte(password)))
 }
 
-func Login(param *domain.LoginParam) (err error) {
+func Login(param *domain.LoginParam) (token string, err error) {
 	// 根据用户名称获取密码
 	user := mysql.SearchUserByUserName(param.Username)
 	encryptPassword := EncryptPassword(param.Password)
@@ -48,5 +49,8 @@ func Login(param *domain.LoginParam) (err error) {
 	if user.Password != encryptPassword {
 		err = errors.New("username or password is wrong")
 	}
-	return err
+	if err == nil {
+		token, err = jwt.GetToken(user.UserId)
+	}
+	return token, err
 }
