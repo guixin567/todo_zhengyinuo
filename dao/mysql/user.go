@@ -21,3 +21,9 @@ func CheckUserExit(userName string) bool {
 func InsertUser(user *domain.User) {
 	db.Create(user)
 }
+
+func SearchUserByUserName(userName string) (user *domain.User) {
+	user = &domain.User{Username: userName}
+	db.First(user)
+	return user
+}

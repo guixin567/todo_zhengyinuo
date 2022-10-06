@@ -39,3 +39,14 @@ func EncryptPassword(password string) string {
 	hash.Write([]byte(secret))
 	return hex.EncodeToString(hash.Sum([]byte(password)))
 }
+
+func Login(param *domain.LoginParam) (err error) {
+	// 根据用户名称获取密码
+	user := mysql.SearchUserByUserName(param.Username)
+	encryptPassword := EncryptPassword(param.Password)
+	//判断数据库的密码和传进来的密码是否相同
+	if user.Password != encryptPassword {
+		err = errors.New("username or password is wrong")
+	}
+	return err
+}

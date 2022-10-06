@@ -37,6 +37,24 @@ func Register(ctx *gin.Context) {
 
 func Login(ctx *gin.Context) {
 	//1,参数获取和校验
+	param := new(domain.LoginParam)
+	if err := ctx.ShouldBindJSON(param); err != nil {
+		ctx.JSON(http.StatusOK, gin.H{
+			"msg": "username or password is wrong",
+		})
+		return
+	}
+
 	//2,业务逻辑处理
+	if err := service.Login(param); err != nil {
+		ctx.JSON(http.StatusOK, gin.H{
+			"msg": err.Error(),
+		})
+		return
+	}
 	//3，数据返回
+	ctx.JSON(http.StatusOK, gin.H{
+		"msg": "login success",
+	})
+	return
 }
