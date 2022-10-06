@@ -2,7 +2,10 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"todo_zhengyinuo/controller"
+	"todo_zhengyinuo/controller/response"
+	"todo_zhengyinuo/router/middleware"
 )
 
 func Init() *gin.Engine {
@@ -14,8 +17,8 @@ func Init() *gin.Engine {
 	userGroup.POST("/login", controller.Login)
 
 	taskGroup := engine.Group("/task")
-	taskGroup.POST("/add", func(context *gin.Context) {
-
+	taskGroup.POST("/add", middleware.JwtAuth, func(context *gin.Context) {
+		context.JSON(http.StatusOK, gin.H{"userId": context.GetInt64(response.KeyUserId)})
 	})
 	return engine
 }
