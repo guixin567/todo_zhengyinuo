@@ -6,6 +6,7 @@ var codeMessageMap = map[int64]string{
 	CodeUserNameOrPasswordError: "user name or password is wrong",
 	CodeAuthInvalid:             "auth failed",
 	CodeNeedLogin:               "need login",
+	CodeServerError:             "server error",
 }
 
 const (
@@ -14,6 +15,7 @@ const (
 	CodeUserNameOrPasswordError
 	CodeAuthInvalid
 	CodeNeedLogin
+	CodeServerError
 )
 
 func getMsg(code int64) string {

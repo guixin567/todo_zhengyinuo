@@ -20,5 +20,7 @@ func Init() *gin.Engine {
 	taskGroup.POST("/add", middleware.JwtAuth, func(context *gin.Context) {
 		context.JSON(http.StatusOK, gin.H{"userId": context.GetInt64(response.KeyUserId)})
 	})
+
+	taskGroup.GET("/category", controller.Category)
 	return engine
 }
