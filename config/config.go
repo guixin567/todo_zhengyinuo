@@ -6,6 +6,7 @@ import (
 
 type GlobalConfig struct {
 	MysqlConfig *MysqlConfig `mapstructure:"mysql"`
+	RedisConfig *RedisConfig `mapstructure:"redis"`
 }
 
 type MysqlConfig struct {
@@ -15,6 +16,14 @@ type MysqlConfig struct {
 	DbUser     string `mapstructure:"dbUser"`
 	DbPassword string `mapstructure:"dbPassword"`
 	DbName     string `mapstructure:"dbName"`
+}
+
+type RedisConfig struct {
+	Host     string `mapstructure:"host"`
+	Port     string `mapstructure:"port"`
+	Name     int    `mapstructure:"name"`
+	Password string `mapstructure:"password"`
+	PoolSize int    `mapstructure:"poolSize"`
 }
 
 var Global = new(GlobalConfig)

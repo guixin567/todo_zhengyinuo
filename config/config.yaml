@@ -3,9 +3,11 @@ service:
   HttpPort:  :8080
 
 redis:
-  RedisAddr:  172.19.176.25:6379
-  RedisPw:
-  RedisDbName:  2
+  host: 127.0.0.1
+  port: 6379
+  name: 0
+  password: ""
+  poolSize: 100
 
 mysql:
   db: mysql
